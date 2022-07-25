@@ -1,0 +1,218 @@
+<h3 class="text-center">Locazione Zen</h3>
+<h2 class="text-center">Registra il tuo contratto!</h2>
+
+<div>
+    <div class="loading-layout">
+        <div *ngIf="loading === true" class="spinner-border text-warning" style="width: 7rem; height: 7rem;" role="status">
+        </div>
+    </div>
+    <div *ngIf="formOne === false && formTwo === false && formThree === false && formFour === false && loading === false">
+        <!--FORM 1 FORM CONTRACT-->
+        <form [formGroup]="formContract">
+            <div class="container-form">
+                <div class="group-form">
+                    <h4 class="title">Che tipo di contratto vuoi stipulare?</h4>
+                    <div class="checkbox-input" *ngFor="let type of typeOfContracts; let i = index">
+                        <input name="contractType" type="checkbox" formControlName="contractType">
+                        <label for="contractType">{{type}}</label>
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Quando inzia e finisce la locazione?</h4>
+                    <div>
+                        <label for="startDate">Dal</label>
+                        <input name="startDate" type="date" formControlName="startDate">
+                    </div>
+                    <div>
+                        <label for="endDate">Al</label>
+                        <input name="endDate" type="date" formControlName="endDate">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">A quanti mesi equivale il preavviso?</h4>
+                    <div>
+                        <input class="text-input" name="monthsNotice" type="text" formControlName="monthsNotice" placeholder="Es. 3">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-warning" [disabled]="!formContract.valid" (click)="nextForm(formContract, 2)">Avanti</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="formOne === true && formTwo === false && formThree === false && formFour === false && loading === false">
+        <!--FORM 2 FORM LESSOR-->
+        <form [formGroup]="formLessor">
+            <div class="container-form">
+                <div class="group-form">
+                    <h4 class="title">Come si chiama il Locatore?</h4>
+                    <div>
+                        <input class="text-input" name="nameLessor" type="text" formControlName="nameLessor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Dov'è nato?</h4>
+                    <div>
+                        <select class="text-input" formControlName="birthLocationLessor">
+                            <option *ngFor="let city of cities" [value]="city.nome">{{city.nome}}</option>    
+                        </select>
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Quando è nato?</h4>
+                    <div>
+                        <input class="text-input" type="date" formControlName="birthdateLessor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Codice Fiscale</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="fiscalCodeLessor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Qual è l'indirizzo di residenza?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="residenceLessor">
+                    </div>
+                </div>
+                <div class="buttons-layout">
+                    <button type="button" class="btn btn-outline-warning" (click)="backForm(1)">Indietro</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!formLessor.valid" (click)="nextForm(formLessor, 3)">Avanti</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="formOne === true && formTwo === true && formThree === false && formFour === false && loading === false">
+        <!--FORM 3 FORM CONDUCTOR-->
+        <form [formGroup]="formConductor">
+            <div class="container-form">
+                <div class="group-form">
+                    <h4 class="title">Come si chiama il Conduttore?</h4>
+                    <div>
+                        <input class="text-input"  type="text" formControlName="nameConductor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Dov'è nato?</h4>
+                    <div>
+                        <select class="text-input" formControlName="birthLocationConductor">
+                            <option *ngFor="let city of cities; let i = index" [value]="city.nome">{{city.nome}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Quando è nato?</h4>
+                    <div>
+                        <input class="text-input" type="date" formControlName="birthdateConductor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Codice Fiscale</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="fiscalCodeConductor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Qual è l'indirizzo di residenza?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="residenceConductor">
+                    </div>
+                </div>
+                <div class="buttons-layout">
+                    <button type="button" class="btn btn-outline-warning" (click)="backForm(2)">Indietro</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!formConductor.valid" (click)="nextForm(formConductor, 4)">Avanti</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="formOne === true && formTwo === true && formThree === true && formFour === false && loading === false">
+        <!--FORM 4 FORM LOCATION-->
+        <form [formGroup]="formLocation">
+            <div class="container-form">
+                <div class="group-form">
+                    <h4 class="title">Qual è l'indirizzo dell'immobile?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="address">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Quanti metri quadrati è la superficie dell'immobile?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="space">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Qual è il piano dell'immobile?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="floor">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Di quante stanze è composto l'immobile (esclusi cucina e bagno)?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="roomsNumber">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Quali sono i dati catastali dell'immobile?</h4>
+                    <div>
+                        <label for="paper">Foglio</label>
+                        <input name="paper" type="text" formControlName="paper">
+                    </div>
+                    <div>
+                        <label for="parcel">Particella</label>
+                        <input name="parcel" type="text" formControlName="parcel">
+                    </div>
+                    <div>
+                        <label for="subordinate">Subalternato</label>
+                        <input name="subordinate" type="text" formControlName="subordinate">
+                    </div>
+                </div>
+                <div class="buttons-layout">
+                    <button type="button" class="btn btn-outline-warning" (click)="backForm(3)">Indietro</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!formLocation.valid" (click)="nextForm(formLocation,5)">Avanti</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="formOne === true && formTwo === true && formThree === true && formFour === true  && loading === false">
+        <!--FORM 5 FORM ECONOMIC-->
+        <form [formGroup]="formEconomic">
+            <div class="container-form">
+                <div class="group-form">
+                    <h4 class="title">A quanto ammonta il deposito cauzionale?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="securityDeposit">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">A quanto ammontano ogni mese?</h4>
+                    <div>
+                        <label for="rent">Canone di Locazione</label>
+                        <input name="rent" type="text" formControlName="rent">
+                    </div>
+                    <div>
+                        <label for="condominiumFees">Spese Condominiali</label>
+                        <input name="condominiumFees" type="text" formControlName="condominiumFees">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">Qual è l'IBAN su cui effettuare il bonifico?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="iban">
+                    </div>
+                </div>
+                <div class="group-form">
+                    <h4 class="title">A chi è intestato il conto?</h4>
+                    <div>
+                        <input class="text-input" type="text" formControlName="bankAccountOwner">
+                    </div>
+                </div>
+                <div class="buttons-layout">
+                    <button type="button" class="btn btn-outline-warning" (click)="cancelAllForms()">Annulla</button>
+                    <button type="button" class="btn btn-outline-warning" (click)="backForm(4)">Indietro</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!formEconomic.valid" (click)="goToSignature()">Avanti</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

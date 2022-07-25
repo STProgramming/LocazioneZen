@@ -1,0 +1,48 @@
+.loading-layout, .breadcrumb-layout{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 345px;
+
+    .group-form{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
+
+        .title{
+            font-size: 16px;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        div, .checkbox-input{
+            display: flex;
+            padding-bottom: 8px;
+            align-items: center;
+            justify-content: space-between;
+            
+            .text-input{
+                width: 100%;
+            }
+        }
+
+        .checkbox-input{
+            justify-content: flex-start;
+            column-gap: 10px;
+        }
+    }
+
+    .buttons-layout{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
